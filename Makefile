@@ -48,6 +48,9 @@ ssb/binpack: src/ssb/binpack.cpp
 ssb/deltabinpack: src/ssb/deltabinpack.cpp
 	g++ $(CFLAGS) src/ssb/deltabinpack.cpp -o bin/ssb/deltabinpack
 
+ssb/rlebinpack: src/ssb/rlebinpack.cpp
+	g++ $(CFLAGS) src/ssb/rlebinpack.cpp -o bin/ssb/rlebinpack
+
 bench/gen: src/bench/gen.cpp
 	g++ $(CFLAGS) src/bench/gen.cpp -o bin/bench/gen
 
@@ -65,6 +68,9 @@ bench/binpack: src/bench/binpack.cpp
 
 bench/deltabinpack: src/bench/deltabinpack.cpp
 	g++ $(CFLAGS) src/bench/deltabinpack.cpp -o bin/bench/deltabinpack
+
+bench/rlebinpack: src/bench/rlebinpack.cpp
+	g++ $(CFLAGS) src/bench/rlebinpack.cpp -o bin/bench/rlebinpack
 
 testelem_bin: src/ssb/testelem_bin.cpp
 	g++ $(CFLAGS) src/ssb/testelem_bin.cpp -o bin/testelem_bin

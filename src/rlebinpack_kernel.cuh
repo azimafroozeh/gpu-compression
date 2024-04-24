@@ -33,7 +33,7 @@ __forceinline__ __device__ void LoadRBinPack(uint* val_block_start, uint* rl_blo
 
   // Block start indices of 5 blocks converted into integer offsets.
   uint *val_block_starts = &shared_buffer[0];
-  uint *rl_block_starts = &shared_buffer[ITEMS_PER_THREAD + 1 + (ITEMS_PER_THREAD << 3) + BLOCK_THREADS * (ITEMS_PER_THREAD)];
+  uint *rl_block_starts = &shared_buffer[BLOCK_THREADS * ITEMS_PER_THREAD];
   if (threadIdx.x  < 2) {
     val_block_starts[threadIdx.x] = val_block_start[tile_idx + threadIdx.x];
     rl_block_starts[threadIdx.x] = rl_block_start[tile_idx + threadIdx.x];
@@ -42,14 +42,16 @@ __forceinline__ __device__ void LoadRBinPack(uint* val_block_start, uint* rl_blo
   __syncthreads();
 
   // Shared memory for 4 blocks of encoded l_shipdate data 
-  uint* val_data_block = &val_block_starts[ITEMS_PER_THREAD + 1 + (ITEMS_PER_THREAD << 3)];
-  uint* rl_data_block = &rl_block_starts[ITEMS_PER_THREAD + 1 + (ITEMS_PER_THREAD << 3)];
+  uint* val_data_block = &val_block_starts[0];
+  uint* rl_data_block = &rl_block_starts[0];
 
   // // Lets load 4 blocks from the encoded column
   uint start_offset_val = val_block_starts[0];
   uint end_offset_val = val_block_starts[1];
   uint start_offset_rl = rl_block_starts[0];
   uint end_offset_rl = rl_block_starts[1];
+
+  __syncthreads();
 
   for (int i=0; i<ITEMS_PER_THREAD; i++) {
     uint index = start_offset_val + threadIdx.x + (i * BLOCK_THREADS); // i * 128
@@ -74,7 +76,7 @@ __forceinline__ __device__ void LoadRBinPack(uint* val_block_start, uint* rl_blo
     uint* rl_ptr = rl_data_block + 3;
 
     uint reference, bitwidth;
-    if (threadIdx.x < num_decode) {
+    if (threadIdx.x < num_decode && threadIdx.x + offset < count) {
       reference = val_data_block[0];
       bitwidth = val_data_block[1] & 255;
       items_value[i] = decodeElementRBin(threadIdx.x + offset, val_ptr, reference, bitwidth);

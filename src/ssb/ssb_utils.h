@@ -16,9 +16,9 @@
 using namespace std;
 //using namespace cub;
 
-#define SF 20
+#define SF 1 
 
-#define BASE_PATH "/home/ubuntu/deltafor/test/ssb/data/"
+#define BASE_PATH "/home/ubuntu/gpu-compression/test/ssb/data/"
 
 #if SF == 1
 #define DATA_DIR BASE_PATH "s1_columnar/"
@@ -157,6 +157,57 @@ encoded_column loadEncodedColumn(string col_name, string encoding, int num_entri
 
   int block_size = 128;
   int elem_per_thread = 4;
+  int tile_size = block_size * elem_per_thread;
+  int adjusted_len = ((num_entries + tile_size - 1)/tile_size) * tile_size;
+  int num_blocks = adjusted_len / block_size;
+
+  col.block_start = new uint[num_blocks + 1];
+
+  ifstream offsetsData (offsets_filename.c_str(), ios::in | ios::binary);
+  if (!offsetsData) {
+    cout << "Unable to open encoded column file" << offsets_filename << endl;
+    exit(1);
+  }
+
+  offsetsData.read((char*)col.block_start, (num_blocks + 1) * sizeof(int));
+  offsetsData.close();
+
+  return col;
+}
+
+encoded_column loadEncodedColumnRLE(string col_name, string encoding, int num_entries) {
+  if (!(encoding == "valbin" || encoding == "rlbin")) {
+    cout << "Encoding has to be valbin or rlbin" << endl;
+    exit(1);
+  }
+
+  // Open file
+  string filename = DATA_DIR + lookup(col_name) + "." + encoding;
+  string offsets_filename = DATA_DIR + lookup(col_name) + "." + encoding + "off";
+
+  int fd = open(filename.c_str(), O_RDONLY);
+
+  // Get size of file
+  struct stat s;
+  int status = fstat(fd, &s);
+  int filesize = s.st_size;
+
+  encoded_column col;
+
+  ifstream colData (filename.c_str(), ios::in | ios::binary);
+  if (!colData) {
+    cout << "Unable to open encoded column file" << filename << endl;
+    exit(1);
+  }
+
+  col.data = new uint[filesize / 4];
+  colData.read((char*)col.data, filesize);
+  colData.close();
+
+  col.data_size = filesize;
+
+  int block_size = 512;
+  int elem_per_thread = 1; //the only difference for RLE
   int tile_size = block_size * elem_per_thread;
   int adjusted_len = ((num_entries + tile_size - 1)/tile_size) * tile_size;
   int num_blocks = adjusted_len / block_size;
