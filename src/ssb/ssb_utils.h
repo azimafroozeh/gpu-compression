@@ -18,7 +18,7 @@ using namespace std;
 
 #define SF 10
 
-#define BASE_PATH "/home/ubuntu/gpu-compression/actions-runner/_work/gpu-compression/gpu-compression/"
+#define BASE_PATH "/home/ubuntu/gpu-compression/actions-runner/_work/gpu-compression/gpu-compression/test/ssb/data/"
 
 #if SF == 1
 #define DATA_DIR BASE_PATH "s1_columnar/"

@@ -55,17 +55,46 @@ jobs:
       - name: make bench/deltabinpack
         run: make bench/deltabinpack
 
-#      - name: ./bin/bench/binpack <num_bits>
-#        run: ./bin/bench/binpack 3
-#
-#      - name: ./bin/bench/binpack <num_bits>
-#        run: ./bin/bench/deltabinpack 3
+      #      - name: ./bin/bench/binpack <num_bits>
+      #        run: ./bin/bench/binpack 3
+      #
+      #      - name: ./bin/bench/binpack <num_bits>
+      #        run: ./bin/bench/deltabinpack 3
+
+      # generate dataset
+      #      - name: cd test/
+      #        run: |
+      #          cd test/
+      #          cd ssb/dbgen
+      #          make
+      #          cd ../loader
+      #          make
+      #          cd ../../
+      #          python3 util.py ssb 10 gen
+      #          sudo python3 util.py ssb 10 transform
+      #          cd src/ssb/
+
+
+      - name: mkdir -p obj/ssb
+        run: ./bin/ssb/test_perf_rle
 
       - name: mkdir -p bin/ssb
         run: mkdir -p bin/ssb
 
+      #      - name: make bin/ssb/test_perf_rle
+      #        run: make bin/ssb/test_perf_rle
+      #
+      #      - name: ./bin/ssb/test_perf_rle <col_name>
+      #        run: ./bin/ssb/test_perf_rle lo_orderkey
+
       - name: make bin/ssb/q11r
         run: make bin/ssb/q11r
+
+      - name: ./bin/ssb/q11r
+        run: ./bin/ssb/q11r
+
+
+
 
 
 
