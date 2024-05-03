@@ -16,7 +16,7 @@
 using namespace std;
 //using namespace cub;
 
-#define SF 1 
+#define SF 10
 
 #define BASE_PATH "/home/ubuntu/gpu-compression/test/ssb/data/"
 
