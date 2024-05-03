@@ -36,6 +36,7 @@ The decompression routines are implemented as device functions. Use the routine 
 * For uniform distribution, distribution d1 and d2
 
 ```
+mkdir -p bin/bench
 make bench/gen bench/gen_d1 bench/gen_d2
 ./bin/bench/gen <num_bits>
 ./bin/bench/gen_d1 <num_bits>
@@ -72,8 +73,18 @@ make ssb/rlebinpack
 ./bin/ssb/rlebinpack <col_name>
 ```
 
+**To compile and run test_perf_rle and test_match_rle**
+```
+make bin/ssb/test_perf_rle
+make bin/ssb/test_match_rle
+
+./bin/ssb/test_perf_rle <col_name>
+./bin/ssb/test_match_rle <col_name>
+```
+
 **To compile and run SSB queries**
 ```
+mkdir -p bin/ssb
 make bin/ssb/q11r
 make bin/ssb/q21r
 make bin/ssb/q31r
