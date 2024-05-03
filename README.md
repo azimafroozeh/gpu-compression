@@ -73,6 +73,7 @@ make ssb/rlebinpack
 ```
 
 **To compile and run SSB queries**
+```
 make bin/ssb/q11r
 make bin/ssb/q21r
 make bin/ssb/q31r
@@ -82,3 +83,4 @@ make bin/ssb/q41r
 ./bin/ssb/q21r
 ./bin/ssb/q31r
 ./bin/ssb/q41r
+```
