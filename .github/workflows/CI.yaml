@@ -81,16 +81,25 @@ jobs:
       - name: mkdir -p bin/ssb
         run: mkdir -p bin/ssb
 
-      #      - name: make bin/ssb/test_perf_rle
-      #        run: make bin/ssb/test_perf_rle
-      #
-      #      - name: ./bin/ssb/test_perf_rle <col_name>
-      #        run: ./bin/ssb/test_perf_rle lo_orderkey
+      - name: make bin/ssb/test_perf_rle
+        run: make bin/ssb/test_perf_rle
+
+      - name: ./bin/ssb/test_perf_rle <col_name>
+        if: always()
+        run: ./bin/ssb/test_perf_rle lo_orderkey
+
+      - name: ./bin/ssb/test_match_rle <col_name>
+        if: always()
+        run: ./bin/ssb/test_match_rle lo_orderkey
 
       - name: make bin/ssb/q11r
         run: make bin/ssb/q11r
 
+      - name: ls /home/ubuntu/gpu-compression/test/ssb/data/s10_columnar/
+        run: ls /home/ubuntu/gpu-compression/test/ssb/data/s10_columnar/
+
       - name: ./bin/ssb/q11r
+        if: always()
         run: ./bin/ssb/q11r
 
 
