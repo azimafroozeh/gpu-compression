@@ -1,0 +1,71 @@
+name: CI
+run-name: ${{ github.actor }}
+
+on: push
+
+jobs:
+  build:
+    if: github.actor == 'azimafroozeh'
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ self-hosted ]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+
+      - name: Make directory build
+        run: mkdir ${{github.workspace}}/build
+
+      - name: nvidia-smi
+        run: nvidia-smi
+
+      - name: nvcc version
+        run: nvcc --version
+
+      - name: gcc --version
+        run: gcc --version
+
+      - name: make clean
+        run: make clean
+
+      - name: mkdir -p bin/bench
+        run: mkdir -p bin/bench
+
+      - name: make bench/gen bench/gen_d1 bench/gen_d2
+        run: make bench/gen bench/gen_d1 bench/gen_d2
+
+      - name: ./bin/bench/gen <num_bits>
+        run: ./bin/bench/gen 3
+
+      - name: ./bin/bench/gen_d1 <num_bits>
+        run: ./bin/bench/gen_d1 3
+
+      - name: ./bin/bench/gen_d2 <num_bits>
+        run: ./bin/bench/gen_d2 3
+
+      - name: make directory build
+        run: mkdir -p ${{github.workspace}}/build
+
+      - name: make bench/binpack
+        run: make bench/binpack
+
+      - name: make bench/deltabinpack
+        run: make bench/deltabinpack
+
+#      - name: ./bin/bench/binpack <num_bits>
+#        run: ./bin/bench/binpack 3
+#
+#      - name: ./bin/bench/binpack <num_bits>
+#        run: ./bin/bench/deltabinpack 3
+
+      - name: mkdir -p bin/ssb
+        run: mkdir -p bin/ssb
+
+      - name: make bin/ssb/q11r
+        run: make bin/ssb/q11r
+
+
+
