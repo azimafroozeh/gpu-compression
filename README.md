@@ -75,6 +75,8 @@ make ssb/rlebinpack
 
 **To compile and run test_perf_rle and test_match_rle**
 ```
+mkdir -p bin/ssb
+mkdir -p obj/ssb
 make bin/ssb/test_perf_rle
 make bin/ssb/test_match_rle
 
@@ -85,6 +87,7 @@ make bin/ssb/test_match_rle
 **To compile and run SSB queries**
 ```
 mkdir -p bin/ssb
+mkdir -p obj/ssb
 make bin/ssb/q11r
 make bin/ssb/q21r
 make bin/ssb/q31r
