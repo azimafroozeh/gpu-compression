@@ -75,8 +75,8 @@ jobs:
       #          cd src/ssb/
 
 
-      - name: ./bin/ssb/test_perf_rle
-        run: ./bin/ssb/test_perf_rle
+      - name: mkdir -p obj/ssb
+        run: mkdir -p obj/ssb
 
       - name: mkdir -p bin/ssb
         run: mkdir -p bin/ssb
