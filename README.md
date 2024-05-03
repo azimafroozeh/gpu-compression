@@ -58,11 +58,9 @@ The above two steps will generate flat files which contain 4-byte integer arrays
 # For test distributions
 make bench/binpack
 make bench/deltabinpack
-make bench/rlebinpack
 
 ./bin/bench/binpack <num_bits>
 ./bin/bench/deltabinpack <num_bits>
-./bin/bench/rlebinpack <num_bits>
 
 # For SSB columns
 make ssb/binpack
@@ -74,5 +72,13 @@ make ssb/rlebinpack
 ./bin/ssb/rlebinpack <col_name>
 ```
 
-You can find test SSB implementations [here](https://github.com/anilshanbhag/crystal/tree/master/src/ssb)
-Replace the `BlockLoad` routine with `LoadBinPack` / `LoadDBinPack` / `LoadRBinPack`.
+**To compile and run SSB queries**
+make bin/ssb/q11r
+make bin/ssb/q21r
+make bin/ssb/q31r
+make bin/ssb/q41r
+
+./bin/ssb/q11r
+./bin/ssb/q21r
+./bin/ssb/q31r
+./bin/ssb/q41r
