@@ -102,8 +102,12 @@ jobs:
         continue-on-error: true
         run: ./bin/ssb/test_match_rle lo_orderkey
 
-      - name: make bin/ssb/q11r
-        run: make bin/ssb/q11r
+      - name: make queries
+        run: |
+          make bin/ssb/q11r
+          make bin/ssb/q21r
+          make bin/ssb/q31r
+          make bin/ssb/q41r
 
       - name: ls /home/ubuntu/gpu-compression/test/ssb/data/s10_columnar/
         run: ls /home/ubuntu/gpu-compression/test/ssb/data/s10_columnar/
