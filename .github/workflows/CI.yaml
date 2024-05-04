@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ self-hosted ]
+        platform: [ T4, V100 ]
     runs-on: ${{ matrix.platform }}
 
     steps:
@@ -42,24 +42,24 @@ jobs:
           make bench/binpack
           make bench/deltabinpack
 
-      - name: generate all bit-width
-        continue-on-error: true
-        run: |
-          for i in {0..32}
-          do
-            ./bin/bench/gen $i
-            ./bin/bench/gen_d1 $i
-            ./bin/bench/gen_d2 $i
-          done
+#      - name: generate all bit-width
+#        continue-on-error: true
+#        run: |
+#          for i in {0..32}
+#          do
+#            ./bin/bench/gen $i
+#            ./bin/bench/gen_d1 $i
+#            ./bin/bench/gen_d2 $i
+#          done
 
-      - name: binpack and deltabinpack all bit-width
-        continue-on-error: true
-        run: |
-          for i in {0..32}
-          do
-            ./bin/bench/binpack $i
-            ./bin/bench/deltabinpack $i
-          done
+#      - name: binpack and deltabinpack all bit-width
+#        continue-on-error: true
+#        run: |
+#          for i in {0..32}
+#          do
+#            ./bin/bench/binpack $i
+#            ./bin/bench/deltabinpack $i
+#          done
 
 
       - name: make directory build
