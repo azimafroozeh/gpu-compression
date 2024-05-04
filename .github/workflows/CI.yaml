@@ -55,6 +55,15 @@ jobs:
       - name: make bench/deltabinpack
         run: make bench/deltabinpack
 
+      - name: For SSB columns
+        run: |
+          make ssb/binpack
+          make ssb/deltabinpack
+          make ssb/rlebinpack
+
+      - name: encode columns
+        run: ./compress.sh
+
       #      - name: ./bin/bench/binpack <num_bits>
       #        run: ./bin/bench/binpack 3
       #
