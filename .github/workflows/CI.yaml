@@ -37,6 +37,11 @@ jobs:
       - name: make bench/gen bench/gen_d1 bench/gen_d2
         run: make bench/gen bench/gen_d1 bench/gen_d2
 
+      - name: For test distributions
+        run: |
+          make bench/binpack
+          make bench/deltabinpack
+
       - name: generate all bit-width
         continue-on-error: true
         run: |
