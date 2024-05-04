@@ -108,9 +108,12 @@ jobs:
       - name: ls /home/ubuntu/gpu-compression/test/ssb/data/s10_columnar/
         run: ls /home/ubuntu/gpu-compression/test/ssb/data/s10_columnar/
 
-      - name: ./bin/ssb/q11r
-        if: always()
-        run: ./bin/ssb/q11r
+      - name: run all queries
+        run: |
+          ./bin/ssb/q11r
+          ./bin/ssb/q21r
+          ./bin/ssb/q31r
+          ./bin/ssb/q41r
 
 
 
