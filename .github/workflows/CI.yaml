@@ -57,6 +57,7 @@ jobs:
 
       - name: For SSB columns
         run: |
+          mkdir -p bin/ssb
           make ssb/binpack
           make ssb/deltabinpack
           make ssb/rlebinpack
