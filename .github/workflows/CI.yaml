@@ -140,13 +140,13 @@ jobs:
       - name: NCU all queries
         run: |
           echo "q11 : "
-          ncu ./bin/ssb/q11r | grep duration
+          ncu ./bin/ssb/q11r | grep Duration
           echo "q21 : "
-          ncu ./bin/ssb/q21r | grep duration
+          ncu ./bin/ssb/q21r | grep Duration
           echo "q31 : "
-          ncu ./bin/ssb/q31r | grep duration
+          ncu ./bin/ssb/q31r | grep Duration
           echo "q41 : "
-          ncu ./bin/ssb/q41r | grep duration
+          ncu ./bin/ssb/q41r | grep Duration
 
 
 
