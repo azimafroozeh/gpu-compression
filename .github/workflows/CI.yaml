@@ -137,6 +137,17 @@ jobs:
           ./bin/ssb/q31r
           ./bin/ssb/q41r
 
+      - name: NCU all queries
+        run: |
+          echo "q11 : "
+          ncu ./bin/ssb/q11r | grep duration
+          echo "q21 : "
+          ncu ./bin/ssb/q21r | grep duration
+          echo "q31 : "
+          ncu ./bin/ssb/q31r | grep duration
+          echo "q41 : "
+          ncu ./bin/ssb/q41r | grep duration
+
 
 
 
