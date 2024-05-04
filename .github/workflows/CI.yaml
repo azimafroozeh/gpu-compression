@@ -37,14 +37,15 @@ jobs:
       - name: make bench/gen bench/gen_d1 bench/gen_d2
         run: make bench/gen bench/gen_d1 bench/gen_d2
 
-      - name: ./bin/bench/gen <num_bits>
-        run: ./bin/bench/gen 3
+      - name: generate all bit-width
+        run: |
+          for i in {0..32}
+          do
+            ./bin/bench/gen $i
+            ./bin/bench/gen_d1 $i
+            ./bin/bench/gen_d2 $i
+          done
 
-      - name: ./bin/bench/gen_d1 <num_bits>
-        run: ./bin/bench/gen_d1 3
-
-      - name: ./bin/bench/gen_d2 <num_bits>
-        run: ./bin/bench/gen_d2 3
 
       - name: make directory build
         run: mkdir -p ${{github.workspace}}/build
