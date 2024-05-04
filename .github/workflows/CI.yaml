@@ -91,8 +91,10 @@ jobs:
       - name: mkdir -p bin/ssb
         run: mkdir -p bin/ssb
 
-      - name: make bin/ssb/test_perf_rle
-        run: make bin/ssb/test_perf_rle
+      - name: make RLE
+        run: |
+          make bin/ssb/test_perf_rle
+          make bin/ssb/test_match_rle
 
       - name: ./bin/ssb/test_perf_rle <col_name>
         continue-on-error: true
