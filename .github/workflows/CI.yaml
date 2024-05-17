@@ -97,6 +97,7 @@ jobs:
       #          make
       #          cd ../../
       #          python3 util.py ssb 10 gen
+      #          chmod 777 ssb/data/s10/date.tbl
       #          sudo python3 util.py ssb 10 transform
       #          cd src/ssb/
 
